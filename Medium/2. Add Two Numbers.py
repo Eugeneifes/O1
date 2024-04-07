@@ -284,3 +284,41 @@ while res.next:
 print("->".join([str(elem) for elem in res_]))
 """
 
+
+#намного более элегантное решение, до которого сам не додумался
+"""
+Основной принцип в том, что нам не нужно думать, какой из списков и когда закончится
+Мы будем суммировать значения и занулять их, если список кончился
+"""
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+
+        add_ = 0
+        newListNode = ListNode(0, None)
+        head = newListNode
+
+        while l1 or l2 or add_:
+
+            value1 = l1.val if l1 else 0
+            value2 = l2.val if l2 else 0
+
+            result = value1 + value2 + add_
+
+            add_ = result // 10
+
+            if l1:
+                l1 = l1.next
+
+            if l2:
+                l2 = l2.next
+
+            newListNode.next = ListNode(result % 10)
+            newListNode = newListNode.next
+
+        return head.next
