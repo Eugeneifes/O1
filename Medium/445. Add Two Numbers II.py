@@ -21,4 +21,4 @@ class Solution:
             dummy.next=ListNode(i)
             dummy=dummy.next
 
-        return dummylist.next                     
+        return dummylist.next
